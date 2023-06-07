@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import Movies from "./components/Movies";
+import Filter from "./components/Filter";
 
 function App() {
   const [popular, setPopular] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [activeGenre, setActiveGenre] = useState(0);
 
   useEffect(() => {
     fetchPopular();
@@ -16,6 +19,7 @@ function App() {
     const movies = await data.json();
     // console.log(movies);
     setPopular(movies.results);
+    setFiltered(movies.results);
     {
       /* api key : 2d9145056774b7d98979dcc4f99b08c8 */
     }
@@ -25,8 +29,14 @@ function App() {
   };
   return (
     <>
-      <div>
-        <div className='my-24 flex flex-row flex-wrap mx-20'>
+      <div className='my-24 mx-20'>
+        <Filter
+          popular={popular}
+          setFiltered={setFiltered}
+          activeGenre={activeGenre}
+          setActiveGenre={setActiveGenre}
+        />
+        <div className=' flex flex-row flex-wrap '>
           {popular.map((movie) => {
             return <Movies key={movie.id} movie={movie} />;
           })}
