@@ -26,7 +26,7 @@ function App() {
   return (
     <>
       <div>
-        <div>
+        <div className='my-24 flex flex-row flex-wrap mx-20'>
           {popular.map((movie) => {
             return <Movies key={movie.id} movie={movie} />;
           })}
